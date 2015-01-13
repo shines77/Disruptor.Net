@@ -102,7 +102,7 @@
     <Compile Include="AlertException.cs" />
     <Compile Include="BlockingWaitStrategy.cs" />
     <Compile Include="BusySpinWaitStrategy.cs" />
-    <Compile Include="GoodYieldingWaitStrategy.cs" />
+    <Compile Include="BetterYieldingWaitStrategy.cs" />
     <Compile Include="InsufficientCapacityException.cs" />
     <Compile Include="Dsl\Disruptor.cs" />
     <Compile Include="Dsl\ExceptionHandlerSetting.cs" />

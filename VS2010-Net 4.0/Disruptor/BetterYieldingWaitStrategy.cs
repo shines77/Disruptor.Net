@@ -10,7 +10,7 @@ namespace Disruptor
     /// 
     /// This strategy is a good compromise between performance and CPU resource without incurring significant latency spikes.
     /// </summary>
-    public sealed class GoodYieldingWaitStrategy : IWaitStrategy
+    public sealed class BetterYieldingWaitStrategy : IWaitStrategy
     {
         private const int MaxSpinTries = 2;
 

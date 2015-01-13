@@ -1,6 +1,7 @@
 ﻿#define RELEASE
 
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,13 +10,12 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Formatters.Binary;
 using NUnit.Framework;
 
 using Disruptor.Dsl;
 using Disruptor.PerfTests;
 using Disruptor.PerfTests.Support;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Disruptor.RingQueueTest
 {
@@ -142,7 +142,7 @@ namespace Disruptor.RingQueueTest
                         new MultiThreadedClaimStrategy(BUFFER_SIZE),
                         //new BusySpinWaitStrategy(),
                         new YieldingWaitStrategy(),
-                        //new GoodYieldingWaitStrategy(),
+                        //new BetterYieldingWaitStrategy(),
                         //new SleepingWaitStrategy(),
                         TaskScheduler.Default);
                 }

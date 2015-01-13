@@ -50,6 +50,7 @@
     <Compile Include="AbstractMultiThreadedClaimStrategy.cs" />
     <Compile Include="AggregateEventHandler.cs" />
     <Compile Include="AlertException.cs" />
+    <Compile Include="BetterYieldingWaitStrategy.cs" />
     <Compile Include="BlockingWaitStrategy.cs" />
     <Compile Include="BusySpinWaitStrategy.cs" />
     <Compile Include="InsufficientCapacityException.cs" />
