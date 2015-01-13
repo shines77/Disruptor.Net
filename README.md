@@ -9,7 +9,9 @@ This project aims to provide the full functionality of the Disruptor to CLR proj
 
 ## What's new?
 
-1/14/2015 Added the Disruptor.RingQueueTest for mutil producers and multi comsumers, by shines77. And change the project to use .Net Framework 4.5 in Visual Studio 2013 update 2.
+1/14/2015 (v2.10.0):
+
+* Added the Disruptor.RingQueueTest for mutil producers and multi comsumers, by shines77. And change the project to use .Net Framework 4.5 in Visual Studio 2013 update 2.
 
 11/7/2013 (v2.10.0):
 
