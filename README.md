@@ -3,6 +3,14 @@ Disruptor.Net
 
 A High Performance Inter-Thread Messaging Library for VS.Net version.
 
+VS2010-Net 4.0
+
+* For Visual Studio 2010 and use .Net framework 4.0.
+
+VS2013-Net 4.5
+
+* For Visual Studio 2013 and use .Net framework 4.5.
+
 # .NET port of LMAX Disruptor
 
 This project aims to provide the full functionality of the Disruptor to CLR projects.
