@@ -77,7 +77,7 @@ namespace Disruptor.RingQueueTest
             Console.WriteLine("producers             = {0}", PUSH_CNT);
             Console.WriteLine("consumers             = {0}", POP_CNT);
             //Console.WriteLine("MessageEvent  = {0}", GetObjectSize(_event));
-            Console.WriteLine("MessageEvent.SizeOf() = {0}", Marshal.SizeOf(typeof(MessageEvent)));
+            Console.WriteLine("MessageEvent.SizeOf() = {0} byte(s)", Marshal.SizeOf(typeof(MessageEvent)));
             Console.WriteLine("");
 
             for (int n = 1; n <= MAX_RUN_PASS; ++n)
