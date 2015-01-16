@@ -11,7 +11,7 @@ VS2013-Net 4.5
 
 * For Visual Studio 2013 and use .Net framework 4.5.
 
-# .NET port of LMAX Disruptor
+## .NET port of LMAX Disruptor
 
 This project aims to provide the full functionality of the Disruptor to CLR projects.
 
@@ -19,7 +19,7 @@ This project aims to provide the full functionality of the Disruptor to CLR proj
 
 1/14/2015 (v2.10.0):
 
-* Added the Disruptor.RingQueueTest for mutil producers and multi comsumers, by shines77. And change the project to use .Net Framework 4.5 in Visual Studio 2013 update 2.
+* Added the Disruptor.RingQueueTest for mutil producers and multi consumers, by shines77. And change the project to use .Net Framework 4.5 in Visual Studio 2013 update 2.
 
 11/7/2013 (v2.10.0):
 
