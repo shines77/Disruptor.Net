@@ -77,7 +77,6 @@ namespace Disruptor
             }
         }
 
-
         ///<summary>
         /// Increment sequence by a delta and get the result.
         /// The caller should be held up until the claimed sequence batch is available by tracking the dependentSequences.

@@ -265,17 +265,17 @@ namespace Disruptor.RingQueueTest
                     catch (Exception ex) { }
                 }
             }
+            Thread.MemoryBarrier();* 
             //*/
-
-            Thread.MemoryBarrier();
 
             for (int i = 0; i < POP_CNT; i++)
             {
                 //_latchs.Wait();
             }
 
-            Thread.MemoryBarrier();
+            //Thread.MemoryBarrier();
 
+            /*
             _workerPool.DrainAndHalt();
 
             Thread.MemoryBarrier();
@@ -286,6 +286,7 @@ namespace Disruptor.RingQueueTest
                 if (lifecycleAware != null)
                     lifecycleAware.OnShutdown();
             }
+            //*/
 
             /*
             while (!_remainCount.AtomicCompareExchange(-1, 0))
@@ -296,6 +297,8 @@ namespace Disruptor.RingQueueTest
             //*/
 
             Thread.MemoryBarrier();
+
+            _disruptor.Shutdown();
 
             //Thread.Sleep(200);
 
@@ -451,12 +454,11 @@ namespace Disruptor.RingQueueTest
 
                 while (index < max_index)
                 {
-                    Thread.MemoryBarrier();
                     _event = nPnCRingQueueTest._events[(int)index];
 
                     //Console.WriteLine("Producer::Run() index = " + index + ",\tevent.Value() = " + _event.Value());
 
-                    Thread.MemoryBarrier();
+                    //Thread.MemoryBarrier();
 
                     // Get the sequence
                     var sequence = this._ringBuffer.Next();
@@ -468,7 +470,7 @@ namespace Disruptor.RingQueueTest
                     this._ringBuffer.Publish(sequence);
 
                     //Console.WriteLine("Producer()::Run() -- sequence = {0}, {1}.", index, sequence);
-                    Thread.MemoryBarrier();
+                    //Thread.MemoryBarrier();
 
                     this._counter++;
                     index++;
@@ -486,11 +488,11 @@ namespace Disruptor.RingQueueTest
     class ValueMutationEventHandler : IEventHandler<MessageEvent>
     {
         private readonly int _id;
-        private readonly Operation      _operation;
-        private Volatile4.PaddedLong     _value = new Volatile4.PaddedLong(0);
-        private readonly long           _max_sequence;
-        private readonly CountdownEvent _latch;
-        private RingBuffer<MessageEvent> _ringBuffer = null;
+        private readonly Operation          _operation;
+        private Volatile4.PaddedLong        _value = new Volatile4.PaddedLong(0);
+        private readonly long               _max_sequence;
+        private readonly CountdownEvent     _latch;
+        private RingBuffer<MessageEvent>    _ringBuffer = null;
 
         public ValueMutationEventHandler(int id, Operation operation, long max_sequence, CountdownEvent latch)
         {
@@ -517,7 +519,8 @@ namespace Disruptor.RingQueueTest
 
         public void OnNext(MessageEvent _event, long sequence, bool endOfBatch)
         {
-            _value.WriteUnfenced(_operation.Op(_value.ReadUnfenced(), _event.Value));
+            //_value.WriteUnfenced(_operation.Op(_value.ReadUnfenced(), _event.Value));
+            _value.WriteFullFence(_operation.Op(_value.ReadFullFence(), _event.Value));
 
             //Console.WriteLine("ValueMutationEventHandler::Run() -- Event.Value: {0}", _event.Value);
 
@@ -565,7 +568,8 @@ namespace Disruptor.RingQueueTest
 
         public void OnEvent(MessageEvent _event)
         {
-            this._counters[_id].WriteUnfenced(this._counters[_id].ReadUnfenced() + 1L);
+            //this._counters[_id].WriteUnfenced(this._counters[_id].ReadUnfenced() + 1L);
+            this._counters[_id].WriteFullFence(this._counters[_id].ReadFullFence() + 1L);
 #if DEBUG
             Console.WriteLine("CountingWorkHandler::OnEvent() -- id = {0}, counter = {1}, event.Value = {2}",
                 _id, _counter, _event.Value);
@@ -582,16 +586,16 @@ namespace Disruptor.RingQueueTest
 #endif
                 }
 
-                Thread.MemoryBarrier();
+                //Thread.MemoryBarrier();
                 try
                 {
                     //if (!_done)
                     //    this._latch.Signal();
-                    Thread.MemoryBarrier();
+                    //Thread.MemoryBarrier();
 
                     //Thread.Sleep(100);
 
-                    Thread.MemoryBarrier();
+                    //Thread.MemoryBarrier();
                     _done = true;
                 }
                 catch (Exception ex)
@@ -681,7 +685,7 @@ namespace Disruptor.RingQueueTest
                     this._ringBuffer[sequence].Value = i;
                     this._ringBuffer.Publish(sequence);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     break;
                 }
